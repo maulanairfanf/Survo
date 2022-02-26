@@ -21,7 +21,11 @@ module.exports = {
       zinc: colors.zinc,
       neutral: colors.neutral,
       stone: colors.stone,
-      red: colors.red,
+      red: {
+        100 : "#CE5A4A",
+        200 : "#B03838",
+        300 : "#9E050E"
+      },
       orange: colors.orange,
       amber: colors.amber,
       yellow: colors.yellow,
