@@ -27,10 +27,10 @@ export default function Login() {
             First time to create a survey ?{" "}
             <Link className="text-red-300 " to="/register">
               Register
-            </Link>{" "}
+            </Link>
           </p>
-          <form class="mt-8 space-y-6 w-3/4 mx-auto" method="POST">
-            <div class="rounded-md shadow-sm ">
+          <form className="mt-8 space-y-6 w-3/4 mx-auto" method="POST">
+            <div className="rounded-md shadow-sm ">
               <div className="mb-2">
                 {/* <label for="email-address">Email address</label> */}
                 <input
@@ -39,7 +39,7 @@ export default function Login() {
                   type="email"
                   autocomplete="email"
                   required
-                  class="appearance-none rounded relative w-full px-3 py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
+                  className="appearance-none rounded relative w-full px-3 py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
                   placeholder="Email address"
                 />
               </div>
@@ -51,16 +51,16 @@ export default function Login() {
                   type="password"
                   autocomplete="current-password"
                   required
-                  class="appearance-none rounded relative w-full px-3 py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none  focus:z-10 sm:text-sm"
+                  className="appearance-none rounded relative w-full px-3 py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none  focus:z-10 sm:text-sm"
                   placeholder="Password"
                 />
               </div>
             </div>
 
-            <div class="flex justify-center ">
+            <div className="flex justify-center ">
               <button
                 type="submit"
-                class=" relative  py-2 px-16 border border-transparent text-sm font-medium rounded-md text-white bg-red-300 focus:outline-none"
+                className=" relative  py-2 px-16 border border-transparent text-sm font-medium rounded-md text-white bg-red-300 focus:outline-none"
               >
                 Login
               </button>
