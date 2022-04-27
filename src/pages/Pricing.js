@@ -1,5 +1,5 @@
-import React from "react";
-import Vector from "assets/images/VectorPricing.png";
+import React from 'react';
+import Vector from 'assets/images/VectorPricing.png';
 export default function Pricing() {
   return (
     <div>
