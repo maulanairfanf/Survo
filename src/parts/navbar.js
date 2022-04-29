@@ -33,7 +33,7 @@ export default function Navbar() {
   }, [show, showProfile]);
   return (
     <div className="mx-5 pt-2 flex justify-between">
-      <div class="">
+      <div className="">
         <img src={Logo} alt="logo" />
       </div>
       <div className="flex items-center">

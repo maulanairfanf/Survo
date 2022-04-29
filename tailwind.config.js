@@ -17,7 +17,9 @@ module.exports = {
       black: colors.black,
       white: colors.white,
       slate: colors.slate,
-      gray: colors.gray,
+      gray: {
+        100: '#969696',
+      },
       zinc: colors.zinc,
       neutral: colors.neutral,
       stone: colors.stone,
@@ -28,6 +30,7 @@ module.exports = {
         100: '#CE5A4A',
         200: '#B03838',
         300: '#9E050E',
+        400: '#A30E0E',
       },
       orange: colors.orange,
       amber: colors.amber,
