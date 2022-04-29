@@ -11,6 +11,7 @@ export default function SideBar() {
   const location = useLocation();
 
   const getNavLinkClass = path => {
+    console.log(location.pathname, path);
     return location.pathname === path
       ? 'text-black bg-red-75 bg-opacity-50'
       : 'text-red-50';
@@ -114,7 +115,7 @@ export default function SideBar() {
                   fill="currentColor"
                 />
               </svg>
-              <Link className="ml-5" to="/about">
+              <Link className="ml-5 mt-1" to="/about">
                 About
               </Link>
             </li>

@@ -7,47 +7,38 @@ import Partners from 'parts/Partners';
 import { useLocation } from 'react-router-dom';
 
 export default function About() {
-  // const location = useLocation();
-  // console.log(location);
-  // const getLink = path => {
-  //   return location.pathname === path ? 'text-red-400' : 'text-gray-100';
-  // };
-  function PushClass(para) {
-    return para === window.location.pathname ? 'text-red-400' : 'text-gray-100';
-  }
+  const [activeIndex, setActiveIndex] = useState(1);
+  const handleClick = index => setActiveIndex(index);
+  const checkActive = index =>
+    activeIndex === index ? 'text-red-400 border-b-2' : 'text-gray-100';
 
-  function GetTab(params) {
-    PushClass(params);
-  }
   return (
     <>
       <Router>
-        <div className="flex justify-around mt-4 text-4xl">
-          <button onClick={() => GetTab('/introduction')}>
-            <Link
-              to="/introduction"
-              className={`${PushClass('/introduction')}`}
-            >
-              <span className={`${PushClass('/introduction')}`}>
-                Introduction
-              </span>
-            </Link>
+        <div className="flex justify-around mt-20 text-4xl ">
+          <button
+            className={`font-semibold ${checkActive(1)}`}
+            onClick={() => handleClick(1)}
+          >
+            <Link to="/about/introduction">Introduction</Link>
           </button>
-          <button onClick={() => GetTab('/faq')}>
-            <Link to="/faq" className={`${PushClass('/faq')}`}>
-              <span className={`${PushClass('/faq')}`}>FAQ</span>
-            </Link>
+          <button
+            className={`font-semibold ${checkActive(2)}`}
+            onClick={() => handleClick(2)}
+          >
+            <Link to="/about/faq">FAQ</Link>
           </button>
-          <button onClick={() => GetTab('/partners')}>
-            <Link to="/partners" className={`${PushClass('/partners')}`}>
-              <span className={`${PushClass('/partners')}`}>Partners</span>
-            </Link>
+          <button
+            className={`font-semibold ${checkActive(3)}`}
+            onClick={() => handleClick(3)}
+          >
+            <Link to="/about/partners">Partners</Link>
           </button>
         </div>
         <Switch>
-          <Route exact path="/introduction" component={Introduction} />
-          <Route path="/faq" component={Faq} />
-          <Route path="/partners" component={Partners} />
+          <Route exact path="/about/introduction" component={Introduction} />
+          <Route path="/about/faq" component={Faq} />
+          <Route path="/about/partners" component={Partners} />
         </Switch>
       </Router>
     </>
