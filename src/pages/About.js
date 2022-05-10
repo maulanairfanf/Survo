@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Faq from 'parts/FAQ';
 import Introduction from 'parts/Introduction';
 import Partners from 'parts/Partners';
-import { useLocation } from 'react-router-dom';
 
 export default function About() {
   const [activeIndex, setActiveIndex] = useState(1);
@@ -36,7 +35,7 @@ export default function About() {
           </button>
         </div>
         <Switch>
-          <Route exact path="/about/introduction" component={Introduction} />
+          <Route path="/about/introduction" component={Introduction} />
           <Route path="/about/faq" component={Faq} />
           <Route path="/about/partners" component={Partners} />
         </Switch>

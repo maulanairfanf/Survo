@@ -11,6 +11,8 @@ import About from 'pages/About';
 import Home from 'pages/Home';
 import Pricing from 'pages/Pricing';
 import Register from 'pages/Register';
+import Terms from 'pages/Terms';
+import Settings from 'pages/Settings';
 
 function App() {
   return (
@@ -28,6 +30,9 @@ function App() {
               <Route path="/about" component={About} />
               <Route path="/home" component={Home} />
               <Route path="/pricing" component={Pricing} />
+              <Route path="/terms" component={Terms} />
+              <Route path="/settings" component={Settings} />
+
               <Route exact path="/" component={LandingPage} />
             </Switch>
           </div>
