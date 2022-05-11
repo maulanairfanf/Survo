@@ -15,6 +15,7 @@ import Terms from 'pages/Terms';
 import Settings from 'pages/Settings';
 import Statistics from 'pages/Statistics';
 import EditProfile from 'pages/EditProfile';
+import Surveys from 'pages/Surveys';
 
 function App() {
   return (
@@ -30,7 +31,8 @@ function App() {
               <Route path="/login" component={Login} />{' '}
               <Route path="/edit-profile" component={EditProfile} />
               <Route path="/register" component={Register} />
-              <Route path="/about" component={About} />
+              <Route path="/about" component={About} />{' '}
+              <Route path="/surveys" component={Surveys} />
               <Route path="/home" component={Home} />
               <Route path="/pricing" component={Pricing} />
               <Route path="/terms" component={Terms} />
