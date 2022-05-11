@@ -11,7 +11,6 @@ export default function SideBar() {
   const location = useLocation();
 
   const getNavLinkClass = path => {
-    console.log(location.pathname, path);
     return location.pathname === path
       ? 'text-black bg-red-75 bg-opacity-50'
       : 'text-red-50';

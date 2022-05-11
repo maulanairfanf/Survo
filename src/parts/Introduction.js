@@ -21,21 +21,29 @@ export default function Introduction() {
         </div>
       </div>
       <div className="mt-10">
-        <div className="flex justify-evenly items-center w-2/4">
-          <a href="">
+        <div className="flex justify-evenly items-center w-2/4 ">
+          <a href="https://id-id.facebook.com/" className="cursor-pointer z-10">
             <img src={Facebook} alt="Facebook" />
           </a>
-          <a href="">
+          <a
+            href="https://www.instagram.com/?hl=id"
+            className="cursor-pointer z-10"
+          >
             <img src={Instagram} alt="Instagram" />
           </a>{' '}
-          <a href="">
+          <a href="https://id.linkedin.com/" className="cursor-pointer z-10">
             <img src={Linkedin} alt="Linkedin" />
           </a>{' '}
-          <a href="">
+          <a
+            href="https://twitter.com/i/flow/login"
+            className="cursor-pointer z-10"
+          >
             <img src={Twitter} alt="Twitter" />
           </a>
         </div>
-        <img className="fixed bottom-0" src={Circle} alt="" />
+        <div className="z-0">
+          <img className="fixed bottom-0 " src={Circle} alt="" />
+        </div>
       </div>
     </div>
   );

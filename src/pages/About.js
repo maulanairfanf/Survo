@@ -6,8 +6,15 @@ import Introduction from 'parts/Introduction';
 import Partners from 'parts/Partners';
 
 export default function About() {
-  const [activeIndex, setActiveIndex] = useState(1);
-  const handleClick = index => setActiveIndex(index);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const handleClick = index => {
+    console.log(index);
+    if (index == null) {
+      console.log('null');
+    } else {
+      setActiveIndex(index);
+    }
+  };
   const checkActive = index =>
     activeIndex === index ? 'text-red-400 border-b-2' : 'text-gray-100';
 

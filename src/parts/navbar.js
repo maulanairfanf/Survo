@@ -61,7 +61,9 @@ export default function Navbar() {
                     fill="#7E1515"
                   />
                 </svg>
-                <p className="text-lg ml-4">Edit Profile</p>
+                <Link to="/edit-profile" className="text-lg ml-4">
+                  Edit Profile
+                </Link>
               </button>
               <hr />
               <button className="text-xs px-8 py-3 mb-1 flex justify-around">

@@ -13,6 +13,8 @@ import Pricing from 'pages/Pricing';
 import Register from 'pages/Register';
 import Terms from 'pages/Terms';
 import Settings from 'pages/Settings';
+import Statistics from 'pages/Statistics';
+import EditProfile from 'pages/EditProfile';
 
 function App() {
   return (
@@ -20,19 +22,20 @@ function App() {
       <Router>
         <Navbar />
         <div className="flex ">
-          <div style={{ width: 327, height: 1049 }} className="z-50 bg-white">
+          <div style={{ width: 400 }} className="z-50 bg-white">
             <SideBar />
           </div>
           <div className="w-full z-2">
             <Switch>
-              <Route path="/login" component={Login} />
+              <Route path="/login" component={Login} />{' '}
+              <Route path="/edit-profile" component={EditProfile} />
               <Route path="/register" component={Register} />
               <Route path="/about" component={About} />
               <Route path="/home" component={Home} />
               <Route path="/pricing" component={Pricing} />
               <Route path="/terms" component={Terms} />
               <Route path="/settings" component={Settings} />
-
+              <Route path="/statistics" component={Statistics} />
               <Route exact path="/" component={LandingPage} />
             </Switch>
           </div>
