@@ -1,10 +1,8 @@
 import React from 'react';
 import 'assets/css/style.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
 import Navbar from 'parts/Navbar';
 import SideBar from 'parts/SideBar';
-
 import LandingPage from 'pages/LandingPage';
 import Login from 'pages/Login';
 import About from 'pages/About';
