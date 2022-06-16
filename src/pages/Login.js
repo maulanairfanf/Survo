@@ -1,12 +1,12 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import FormLogin from 'parts/FormLogin';
-import Logo from 'assets/images/BigLogo.png';
-import Google from 'assets/images/Google.png';
-import Vector1 from 'assets/images/Vector1.png';
-import Vector2 from 'assets/images/Vector2.png';
-import Vector3 from 'assets/images/Vector3.png';
-import Vector4 from 'assets/images/Vector4.png';
+import React from "react";
+import { Link } from "react-router-dom";
+import FormLogin from "parts/FormLogin";
+import Logo from "assets/images/BigLogo.png";
+import Google from "assets/images/Google.png";
+import Vector1 from "assets/images/Vector1.png";
+import Vector2 from "assets/images/Vector2.png";
+import Vector3 from "assets/images/Vector3.png";
+import Vector4 from "assets/images/Vector4.png";
 
 export default function Login() {
   return (
@@ -25,7 +25,7 @@ export default function Login() {
           />
           <h2 className="text-2xl font-bold text-center">WELCOME BACK !</h2>
           <p className="text-center">
-            First time to create a survey ?{' '}
+            First time to create a survey ?{" "}
             <Link className="text-red-300 " to="/register">
               Register
             </Link>
