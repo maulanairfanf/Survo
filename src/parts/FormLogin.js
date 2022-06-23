@@ -16,7 +16,6 @@ export default function FormLogin() {
       email: emailRef.current.value,
       password: passwordRef.current.value,
     });
-    console.log(data);
     const config = {
       method: "post",
       url: "http://159.65.142.138/api/v1/login",
