@@ -18,7 +18,7 @@ export default function FormLogin() {
     });
     const config = {
       method: "post",
-      url: "http://159.65.142.138/api/v1/login",
+      url: "https://survo-app.herokuapp.com/api/v1/login",
       headers: {
         "Content-Type": "application/json",
       },

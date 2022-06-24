@@ -7,8 +7,9 @@ export default function EditProfile() {
   const [validate, setValidate] = useState(false);
   const [error, setError] = useState();
 
-  const token = jwt(getToken());
-  const iduser = token.user_id;
+  const token = getToken();
+  const jwtToken = jwt(token);
+  const iduser = jwtToken.user_id;
   const fullNameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -45,13 +46,17 @@ export default function EditProfile() {
     }
     if (validate == true) {
       const config = {
-        method: "post",
-        url: `http://159.65.142.138/api/v1/profile/${iduser}`,
+        method: "put",
+        url: `https://survo-app.herokuapp.com/api/v1/update/${iduser}`,
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
+          "Access-Control-Allow-Headers ": "Content-Type",
         },
         data: data,
       };
+      console.log(config.headers);
+
       axios(config)
         .then(function (response) {
           if (response.status === 200) {

@@ -31,7 +31,7 @@ export default function FormRegister() {
 
       var config = {
         method: "post",
-        url: "http://159.65.142.138/api/v1/register",
+        url: "https://survo-app.herokuapp.com/api/v1/register",
         headers: {
           "Content-Type": "application/json",
         },
