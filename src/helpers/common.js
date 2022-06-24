@@ -12,6 +12,4 @@ export const removeUserSession = () => {
   localStorage.removeItem("fullname");
   localStorage.removeItem("email");
   window.location.reload();
-  // sessionStorage.removeItem("token");
-  // sessionStorage.removeItem("user");
 };

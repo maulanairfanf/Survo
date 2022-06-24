@@ -15,6 +15,8 @@ import Statistics from "pages/Statistics";
 import EditProfile from "pages/EditProfile";
 import Surveys from "pages/Surveys";
 import { getToken } from "helpers/common.js";
+import PrivateRoute from "helpers/PrivateRoute";
+import PublicRoute from "helpers/PublicRoute";
 function App() {
   const token = getToken();
 
@@ -33,17 +35,17 @@ function App() {
 
           <div className="w-full z-2">
             <Switch>
-              <Route path="/login" component={Login} />{" "}
-              <Route path="/edit-profile" component={EditProfile} />
-              <Route path="/register" component={Register} />
-              <Route path="/about" component={About} />{" "}
-              <Route path="/surveys" component={Surveys} />
-              <Route path="/home" component={Home} />
-              <Route path="/pricing" component={Pricing} />
-              <Route path="/terms" component={Terms} />
-              <Route path="/settings" component={Settings} />
-              <Route path="/statistics" component={Statistics} />
-              <Route exact path="/" component={LandingPage} />
+              <PublicRoute path="/login" component={Login} />{" "}
+              <PrivateRoute path="/edit-profile" component={EditProfile} />
+              <PrivateRoute path="/register" component={Register} />
+              <PrivateRoute path="/about" component={About} />{" "}
+              <PrivateRoute path="/surveys" component={Surveys} />
+              <PrivateRoute path="/home" component={Home} />
+              <PrivateRoute path="/pricing" component={Pricing} />
+              <PrivateRoute path="/terms" component={Terms} />
+              <PrivateRoute path="/settings" component={Settings} />
+              <PrivateRoute path="/statistics" component={Statistics} />
+              <PublicRoute exact path="/" component={LandingPage} />
             </Switch>
           </div>
         </div>

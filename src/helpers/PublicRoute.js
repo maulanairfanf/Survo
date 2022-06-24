@@ -2,22 +2,20 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { getToken } from "helpers/common.js";
 
-// handle the private routes
-function PrivateRoute({ component: Component, ...rest }) {
+// handle the public routes
+function PublicRoute({ component: Component, ...rest }) {
   return (
     <Route
       {...rest}
       render={(props) =>
-        getToken() ? (
+        !getToken() ? (
           <Component {...props} />
         ) : (
-          <Redirect
-            to={{ pathname: "/login", state: { from: props.location } }}
-          />
+          <Redirect to={{ pathname: "/surveys" }} />
         )
       }
     />
   );
 }
 
-export default PrivateRoute;
+export default PublicRoute;
