@@ -1,11 +1,13 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import profile from "assets/images/black_hole.jpg";
 import { getToken } from "helpers/common.js";
 import jwt from "jwt-decode";
 
 export default function EditProfile() {
-  const [validate, setValidate] = useState(false);
   const [error, setError] = useState();
+  const [selectedFile, setSelectedFile] = useState();
+  const [isFilePicked, setIsFilePicked] = useState(false);
+  const [image, setImage] = useState("");
 
   const token = getToken();
   const jwtToken = jwt(token);
@@ -17,9 +19,57 @@ export default function EditProfile() {
   const passwordConfirmationRef = useRef();
   const phoneRef = useRef();
   const birthdayRef = useRef();
+
+  useEffect(() => {
+    var axios = require("axios");
+    var config = {
+      method: "get",
+      url: `https://survo-app.herokuapp.com/api/v1/profile/${iduser}`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(response.data.data.image_path);
+        setImage(
+          "https://survo-app.herokuapp.com/" + response.data.data.image_path
+        );
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
+
+  const changeHandler = (event) => {
+    setSelectedFile(event.target.files[0]);
+    setIsFilePicked(true);
+  };
+
+  const handleUpload = (e) => {
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${token}`);
+
+    var formdata = new FormData();
+    formdata.append("image", selectedFile);
+
+    var requestOptions = {
+      method: "PUT",
+      headers: myHeaders,
+      body: formdata,
+      redirect: "follow",
+    };
+
+    fetch("https://survo-app.herokuapp.com/api/v1/upload/2", requestOptions)
+      .then((response) => window.location.reload())
+      .catch((error) => console.log("error", error));
+  };
+
   const handleSubmit = (e) => {
-    e.preventDefault();
     const axios = require("axios");
+
     const data = JSON.stringify({
       fullName: fullNameRef.current.value,
       email: emailRef.current.value,
@@ -30,48 +80,40 @@ export default function EditProfile() {
       birthday: birthdayRef.current.value,
     });
 
-    console.log(data);
-
     if (
-      data.fullName != "" &&
-      data.email != "" &&
-      data.username != "" &&
-      data.password != "" &&
-      data.passwordConfirmation != "" &&
-      data.phone != "" &&
-      data.birthday != ""
+      fullNameRef.current.value != "" &&
+      emailRef.current.value != "" &&
+      usernameRef.current.value != "" &&
+      passwordRef.current.value != "" &&
+      passwordConfirmationRef.current.value != "" &&
+      phoneRef.current.value != "" &&
+      birthdayRef.current.value != ""
     ) {
-      setValidate(true);
-      console.log(validate);
-    }
-    if (validate == true) {
-      const config = {
-        method: "put",
-        url: `https://survo-app.herokuapp.com/api/v1/update/${iduser}`,
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Headers ": "Content-Type",
-        },
-        data: data,
-      };
-      console.log(config.headers);
+      if (passwordRef.current.value == passwordConfirmationRef.current.value) {
+        const configUpdate = {
+          method: "put",
+          url: `https://survo-app.herokuapp.com/api/v1/update/${iduser}`,
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          data: data,
+        };
 
-      axios(config)
-        .then(function (response) {
-          if (response.status === 200) {
-            console.log("Succes");
-            // history.push("/surveys");
-            // window.location.reload();
-          }
-        })
-        .catch(function (error) {
-          console.log(error);
-          // setError("username atau password yang dimasukkan salah");
-        });
+        axios(configUpdate)
+          .then(function (response) {
+            if (response.status === 200) {
+              setError("");
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      } else {
+        setError("password tidak sama");
+      }
     } else {
       setError("Harus terisi semua");
-      console.log("error");
     }
   };
 
@@ -156,21 +198,28 @@ export default function EditProfile() {
         </div>{" "}
         <div className="w-full m-5">
           <img
-            src={profile}
+            src={image}
             alt="profile"
             style={{ width: 259, height: 259 }}
             className=" mx-auto rounded-full object-cover cursor-pointer"
           />
           <div>
-            <div className="mb-8">
+            <div className="mb-4">
               <label className="text-red-300"> Profile </label>{" "}
               <input
-                name="profile"
+                name="image"
                 type="file"
                 required
+                onChange={changeHandler}
                 className="appearance-none rounded relative w-full px-3 py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
               />
             </div>{" "}
+            <button
+              className="px-8 py-1 bg-red-300 text-white rounded-lg mb-4"
+              onClick={handleUpload}
+            >
+              Upload File
+            </button>{" "}
             <div className="mb-8">
               <label className="text-red-300"> Phone Number </label>{" "}
               <input
@@ -195,6 +244,11 @@ export default function EditProfile() {
           </div>{" "}
         </div>{" "}
       </div>{" "}
+      {error && (
+        <div className="text-center mb-4">
+          <span className=" text-red-300 font-bold">{error}</span>
+        </div>
+      )}
       <div className="w-full flex justify-center">
         <button
           className="px-20 py-2 bg-red-300 text-white rounded-lg"
