@@ -1,64 +1,67 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function Surveys() {
-  const data = [
-    {
-      title: 'What do you need at the milk ?',
-      questioons: '15 questions',
-      max_response: 35,
-      now_response: 20,
-      reward: 20000,
-    },
-    {
-      title: 'What do you need at the office ?',
-      questioons: '12 questions',
-      max_response: 100,
-      now_response: 40,
-      reward: 20000,
-    },
-    {
-      title: 'What do you need at the tea ?',
-      questioons: '14 questions',
-      max_response: 40,
-      now_response: 10,
-      reward: 10000,
-    },
-  ];
-  const dataRender = data.map(items => (
-    <div
-      className="border p-5 rounded-lg my-5"
-      style={{ width: 500, height: 200 }}
-    >
-      <h1 className="font-bold text-xl mb-4">{items.title}</h1>
-      <p className="mb-4">15 questions</p>
-      <p className="mb-4">
-        <span className="text-yellow-100 mr-1">Waiting...</span>(
-        {items.now_response}/{items.max_response} responses)
-      </p>
-      <div className="flex justify-between">
-        <div className="flex items-center">
-          <svg
-            width="11"
-            height="11"
-            viewBox="0 0 11 11"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M0 8.70762V9.625C0 10.3834 1.84766 11 4.125 11C6.40234 11 8.25 10.3834 8.25 9.625V8.70762C7.3627 9.33281 5.74062 9.625 4.125 9.625C2.50938 9.625 0.887305 9.33281 0 8.70762ZM6.875 2.75C9.15234 2.75 11 2.1334 11 1.375C11 0.616602 9.15234 0 6.875 0C4.59766 0 2.75 0.616602 2.75 1.375C2.75 2.1334 4.59766 2.75 6.875 2.75ZM0 6.45391V7.5625C0 8.3209 1.84766 8.9375 4.125 8.9375C6.40234 8.9375 8.25 8.3209 8.25 7.5625V6.45391C7.3627 7.18437 5.73848 7.5625 4.125 7.5625C2.51152 7.5625 0.887305 7.18437 0 6.45391ZM8.9375 6.69023C10.1686 6.45176 11 6.00918 11 5.5V4.58262C10.5016 4.93496 9.76895 5.17559 8.9375 5.32383V6.69023ZM4.125 3.4375C1.84766 3.4375 0 4.20664 0 5.15625C0 6.10586 1.84766 6.875 4.125 6.875C6.40234 6.875 8.25 6.10586 8.25 5.15625C8.25 4.20664 6.40234 3.4375 4.125 3.4375ZM8.83652 4.64707C10.1256 4.41504 11 3.95957 11 3.4375V2.52012C10.2373 3.05938 8.92676 3.34941 7.54746 3.41816C8.18125 3.72539 8.64746 4.13789 8.83652 4.64707Z"
-              fill="#FFD24D"
-            />
-          </svg>
-          <span className="ml-2">+ {items.reward} points</span>
+  const [surveys, setSurveys] = useState("");
+
+  useEffect(() => {
+    var axios = require("axios");
+    var config = {
+      method: "get",
+      url: "https://survo-app.herokuapp.com/api/v1/surveylist",
+      headers: {
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6Im1hdWxhbmFAZ21haWwuY29tIiwiZXhwIjoxNjU2MzAzNTE1LCJpc3MiOiJBdXRoU2VydmljZSJ9.Fnlb8GYXUVGxcuFLzjijsQdV6UHzO4kmT6snPI8HsaA",
+      },
+    };
+
+    axios(config)
+      .then(function (response) {
+        setSurveys(response.data.data);
+        console.log(surveys);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
+
+  const dataRender = surveys
+    ? surveys.map((items) => (
+        <div
+          className="border p-5 rounded-lg my-5"
+          style={{ width: 500, height: 200 }}
+        >
+          <h1 className="font-bold text-xl mb-4">{items.title}</h1>
+          <p className="mb-4">15 questions</p>
+          <p className="mb-4">
+            <span className="text-yellow-100 mr-1">Waiting...</span>(
+            {items.count}/{items.target} responses)
+          </p>
+          <div className="flex justify-between">
+            <div className="flex items-center">
+              <svg
+                width="11"
+                height="11"
+                viewBox="0 0 11 11"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M0 8.70762V9.625C0 10.3834 1.84766 11 4.125 11C6.40234 11 8.25 10.3834 8.25 9.625V8.70762C7.3627 9.33281 5.74062 9.625 4.125 9.625C2.50938 9.625 0.887305 9.33281 0 8.70762ZM6.875 2.75C9.15234 2.75 11 2.1334 11 1.375C11 0.616602 9.15234 0 6.875 0C4.59766 0 2.75 0.616602 2.75 1.375C2.75 2.1334 4.59766 2.75 6.875 2.75ZM0 6.45391V7.5625C0 8.3209 1.84766 8.9375 4.125 8.9375C6.40234 8.9375 8.25 8.3209 8.25 7.5625V6.45391C7.3627 7.18437 5.73848 7.5625 4.125 7.5625C2.51152 7.5625 0.887305 7.18437 0 6.45391ZM8.9375 6.69023C10.1686 6.45176 11 6.00918 11 5.5V4.58262C10.5016 4.93496 9.76895 5.17559 8.9375 5.32383V6.69023ZM4.125 3.4375C1.84766 3.4375 0 4.20664 0 5.15625C0 6.10586 1.84766 6.875 4.125 6.875C6.40234 6.875 8.25 6.10586 8.25 5.15625C8.25 4.20664 6.40234 3.4375 4.125 3.4375ZM8.83652 4.64707C10.1256 4.41504 11 3.95957 11 3.4375V2.52012C10.2373 3.05938 8.92676 3.34941 7.54746 3.41816C8.18125 3.72539 8.64746 4.13789 8.83652 4.64707Z"
+                  fill="#FFD24D"
+                />
+              </svg>
+              <span className="ml-2">+ {items.point} points</span>
+            </div>
+            <div>
+              <button className="text-white rounded bg-red-75 py-2 px-5">
+                Join Survey
+              </button>
+            </div>
+          </div>
         </div>
-        <div>
-          <button className="text-white rounded bg-red-75 py-2 px-5">
-            Join Survey
-          </button>
-        </div>
-      </div>
-    </div>
-  ));
+      ))
+    : "";
 
   return (
     <div className="m-10">
@@ -105,9 +108,12 @@ export default function Surveys() {
           <h1 className="font-bold text-white text-2xl">New Survey</h1>
           <p className="text-white">Survey can help to solve problems</p>
         </div>
-        <button className="text-red-75 bg-white rounded-full px-10 py-2 font-bold">
+        <Link
+          to="/createsurvey"
+          className="text-red-75 bg-white rounded-full px-10 py-2 font-bold mt-3"
+        >
           Create New Survey
-        </button>
+        </Link>
       </div>
       <div className="flex flex-wrap justify-between">{dataRender}</div>
     </div>

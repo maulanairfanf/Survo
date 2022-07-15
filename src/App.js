@@ -14,6 +14,8 @@ import Settings from "pages/Settings";
 import Statistics from "pages/Statistics";
 import EditProfile from "pages/EditProfile";
 import Surveys from "pages/Surveys";
+import CreateSurvey from "pages/CreateSurvey";
+
 import { getToken } from "helpers/common.js";
 import PrivateRoute from "helpers/PrivateRoute";
 import PublicRoute from "helpers/PublicRoute";
@@ -37,9 +39,13 @@ function App() {
             <Switch>
               <PublicRoute path="/login" component={Login} />{" "}
               <PrivateRoute path="/edit-profile" component={EditProfile} />
-              <PrivateRoute path="/register" component={Register} />
+              <PublicRoute path="/register" component={Register} />
               <PrivateRoute path="/about" component={About} />{" "}
               <PrivateRoute path="/surveys" component={Surveys} />
+              <PrivateRoute
+                path="/createsurvey"
+                component={CreateSurvey}
+              />{" "}
               <PrivateRoute path="/home" component={Home} />
               <PrivateRoute path="/pricing" component={Pricing} />
               <PrivateRoute path="/terms" component={Terms} />
