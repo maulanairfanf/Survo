@@ -1,12 +1,70 @@
-import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { data } from 'autoprefixer';
+import React, { useRef, useState } from 'react';
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { getToken } from 'helpers/common.js';
 
 export default function CreateSurvey() {
+  const [surveyTotal, setSurveyTotal] = useState();
+  const question1 = useRef();
+  const choiceA = useRef();
+  const choiceB = useRef();
+  const choiceC = useRef();
+  const type1 = useRef();
   const surveyCategory = useRef();
   const surveyTitle = useRef();
   const surveyDescription = useRef();
   const target = useRef();
+  const arrSubmit = [];
+  const token = getToken();
 
+  const submit = e => {
+    e.preventDefault();
+    let arr_choice = [];
+    arr_choice.push(choiceA.current.value);
+    arr_choice.push(choiceB.current.value);
+    arr_choice.push(choiceC.current.value);
+    let arrChoice =
+      choiceA.current.value +
+      ',' +
+      choiceB.current.value +
+      ',' +
+      choiceC.current.value;
+
+    var axios = require('axios');
+
+    var data = JSON.stringify({
+      survey_category: surveyCategory.current.value,
+      survey_title: surveyTitle.current.value,
+      survey_description: surveyDescription.current.value,
+      target: parseInt(target.current.value),
+      question: [
+        {
+          survey_question: question1.current.value,
+          question_type: type1.current.value,
+          option_name: arrChoice,
+        },
+      ],
+    });
+
+    var config = {
+      method: 'post',
+      url: 'https://survo-app.herokuapp.com/api/v1/createsurvey',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
   return (
     <div>
       <div className="">
@@ -29,7 +87,7 @@ export default function CreateSurvey() {
         </h1>
       </div>
 
-      <form className="mt-5" action="">
+      <form className="mt-5" action="" onSubmit={submit}>
         <div>
           <div className="mb-2">
             <p>Survey Category</p>
@@ -75,55 +133,87 @@ export default function CreateSurvey() {
               placeholder="0"
             />
           </div>
+          {/* <div className="mb-2">
+            <p>Survey Total</p>
+            <input
+              name="surveyTotal"
+              type="text"
+              onChange={handleChange}
+              required
+              className="form-control block w-1/5 appearance-none rounded relative px-3  py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
+              placeholder="Total Survey"
+            />
+          </div> */}
         </div>
         <div>
-          <div>
+          <div className="mb-8">
             <label>Question 1</label>
             <input
               name="surveyDescription"
               type="text"
-              ref={target}
               required
               className="form-control block w-3/4 appearance-none rounded relative px-3  py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
               placeholder="Question 1"
+              ref={question1}
             />
             <div className="flex w-3/4 justify-around mt-4">
+              <div>
+                <label>Type</label>
+                <select
+                  name="surveyDescription"
+                  type="text"
+                  required
+                  ref={type1}
+                  className="form-control block w-3/4 appearance-none rounded relative px-3  py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
+                >
+                  <option value="Radio">Radio</option>
+                  <option value="Checkbox">Checkbox</option>
+                </select>
+              </div>
               <div>
                 <label>Answer A</label>
                 <input
                   name="surveyDescription"
-                  type="number"
-                  ref={target}
+                  type="text"
                   required
                   className="form-control block  appearance-none rounded relative px-3  py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
                   placeholder="A"
-                />{" "}
+                  ref={choiceA}
+                />{' '}
               </div>
               <div>
                 <label>Answer B</label>
                 <input
                   name="surveyDescription"
-                  type="number"
-                  ref={target}
+                  type="text"
                   required
                   className="form-control block appearance-none rounded relative px-3  py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
                   placeholder="B"
-                />{" "}
+                  ref={choiceB}
+                />{' '}
               </div>
               <div>
                 <label>Answer C</label>
 
                 <input
                   name="surveyDescription"
-                  type="number"
-                  ref={target}
+                  type="text"
                   required
                   className="form-control block  appearance-none rounded relative px-3  py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
                   placeholder="C"
+                  ref={choiceC}
                 />
               </div>
             </div>
           </div>
+        </div>
+        <div className="flex justify-center ">
+          <button
+            type="submit"
+            className=" relative py-2 px-16 border border-transparent text-sm font-medium rounded-md text-white bg-red-300 focus:outline-none"
+          >
+            Submit
+          </button>
         </div>
       </form>
     </div>
