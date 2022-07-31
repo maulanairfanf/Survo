@@ -1,16 +1,36 @@
-import { data } from 'autoprefixer';
-import React, { useRef, useState } from 'react';
-import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { getToken } from 'helpers/common.js';
+import { data } from "autoprefixer";
+import React, { useRef, useState } from "react";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { getToken } from "helpers/common.js";
 
 export default function CreateSurvey() {
   const [surveyTotal, setSurveyTotal] = useState();
   const question1 = useRef();
-  const choiceA = useRef();
-  const choiceB = useRef();
-  const choiceC = useRef();
+  const question2 = useRef();
+  const question3 = useRef();
+  const question4 = useRef();
+  const question5 = useRef();
+  const choiceA_1 = useRef();
+  const choiceB_1 = useRef();
+  const choiceC_1 = useRef();
+  const choiceA_2 = useRef();
+  const choiceB_2 = useRef();
+  const choiceC_2 = useRef();
+  const choiceA_3 = useRef();
+  const choiceB_3 = useRef();
+  const choiceC_3 = useRef();
+  const choiceA_4 = useRef();
+  const choiceB_4 = useRef();
+  const choiceC_4 = useRef();
+  const choiceA_5 = useRef();
+  const choiceB_5 = useRef();
+  const choiceC_5 = useRef();
   const type1 = useRef();
+  const type2 = useRef();
+  const type3 = useRef();
+  const type4 = useRef();
+  const type5 = useRef();
   const surveyCategory = useRef();
   const surveyTitle = useRef();
   const surveyDescription = useRef();
@@ -18,20 +38,45 @@ export default function CreateSurvey() {
   const arrSubmit = [];
   const token = getToken();
 
-  const submit = e => {
+  const submit = (e) => {
     e.preventDefault();
-    let arr_choice = [];
-    arr_choice.push(choiceA.current.value);
-    arr_choice.push(choiceB.current.value);
-    arr_choice.push(choiceC.current.value);
-    let arrChoice =
-      choiceA.current.value +
-      ',' +
-      choiceB.current.value +
-      ',' +
-      choiceC.current.value;
 
-    var axios = require('axios');
+    let arrChoice_1 =
+      choiceA_1.current.value +
+      "," +
+      choiceB_1.current.value +
+      "," +
+      choiceC_1.current.value;
+
+    let arrChoice_2 =
+      choiceA_2.current.value +
+      "," +
+      choiceB_2.current.value +
+      "," +
+      choiceC_2.current.value;
+
+    let arrChoice_3 =
+      choiceA_3.current.value +
+      "," +
+      choiceB_3.current.value +
+      "," +
+      choiceC_3.current.value;
+
+    let arrChoice_4 =
+      choiceA_4.current.value +
+      "," +
+      choiceB_4.current.value +
+      "," +
+      choiceC_4.current.value;
+
+    let arrChoice_5 =
+      choiceA_5.current.value +
+      "," +
+      choiceB_5.current.value +
+      "," +
+      choiceC_5.current.value;
+
+    var axios = require("axios");
 
     var data = JSON.stringify({
       survey_category: surveyCategory.current.value,
@@ -42,17 +87,39 @@ export default function CreateSurvey() {
         {
           survey_question: question1.current.value,
           question_type: type1.current.value,
-          option_name: arrChoice,
+          option_name: arrChoice_1,
+        },
+        {
+          survey_question: question2.current.value,
+          question_type: type2.current.value,
+          option_name: arrChoice_2,
+        },
+        {
+          survey_question: question3.current.value,
+          question_type: type3.current.value,
+          option_name: arrChoice_3,
+        },
+        {
+          survey_question: question4.current.value,
+          question_type: type4.current.value,
+          option_name: arrChoice_4,
+        },
+        {
+          survey_question: question5.current.value,
+          question_type: type5.current.value,
+          option_name: arrChoice_5,
         },
       ],
     });
 
+    console.log(data);
+
     var config = {
-      method: 'post',
-      url: 'https://survo-app.herokuapp.com/api/v1/createsurvey',
+      method: "post",
+      url: "https://survo-app.herokuapp.com/api/v1/createsurvey",
       headers: {
         Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       data: data,
     };
@@ -178,8 +245,8 @@ export default function CreateSurvey() {
                   required
                   className="form-control block  appearance-none rounded relative px-3  py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
                   placeholder="A"
-                  ref={choiceA}
-                />{' '}
+                  ref={choiceA_1}
+                />{" "}
               </div>
               <div>
                 <label>Answer B</label>
@@ -189,8 +256,8 @@ export default function CreateSurvey() {
                   required
                   className="form-control block appearance-none rounded relative px-3  py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
                   placeholder="B"
-                  ref={choiceB}
-                />{' '}
+                  ref={choiceB_1}
+                />{" "}
               </div>
               <div>
                 <label>Answer C</label>
@@ -201,13 +268,253 @@ export default function CreateSurvey() {
                   required
                   className="form-control block  appearance-none rounded relative px-3  py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
                   placeholder="C"
-                  ref={choiceC}
+                  ref={choiceC_1}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="mb-8">
+            <label>Question 2</label>
+            <input
+              name="surveyDescription"
+              type="text"
+              required
+              className="form-control block w-3/4 appearance-none rounded relative px-3  py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
+              placeholder="Question 1"
+              ref={question2}
+            />
+            <div className="flex w-3/4 justify-around mt-4">
+              <div>
+                <label>Type</label>
+                <select
+                  name="surveyDescription"
+                  type="text"
+                  required
+                  ref={type2}
+                  className="form-control block w-3/4 appearance-none rounded relative px-3  py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
+                >
+                  <option value="Radio">Radio</option>
+                  <option value="Checkbox">Checkbox</option>
+                </select>
+              </div>
+              <div>
+                <label>Answer A</label>
+                <input
+                  name="surveyDescription"
+                  type="text"
+                  required
+                  className="form-control block  appearance-none rounded relative px-3  py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
+                  placeholder="A"
+                  ref={choiceA_2}
+                />{" "}
+              </div>
+              <div>
+                <label>Answer B</label>
+                <input
+                  name="surveyDescription"
+                  type="text"
+                  required
+                  className="form-control block appearance-none rounded relative px-3  py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
+                  placeholder="B"
+                  ref={choiceB_2}
+                />{" "}
+              </div>
+              <div>
+                <label>Answer C</label>
+
+                <input
+                  name="surveyDescription"
+                  type="text"
+                  required
+                  className="form-control block  appearance-none rounded relative px-3  py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
+                  placeholder="C"
+                  ref={choiceC_2}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="mb-8">
+            <label>Question 3</label>
+            <input
+              name="surveyDescription"
+              type="text"
+              required
+              className="form-control block w-3/4 appearance-none rounded relative px-3  py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
+              placeholder="Question 1"
+              ref={question3}
+            />
+            <div className="flex w-3/4 justify-around mt-4">
+              <div>
+                <label>Type</label>
+                <select
+                  name="surveyDescription"
+                  type="text"
+                  required
+                  ref={type3}
+                  className="form-control block w-3/4 appearance-none rounded relative px-3  py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
+                >
+                  <option value="Radio">Radio</option>
+                  <option value="Checkbox">Checkbox</option>
+                </select>
+              </div>
+              <div>
+                <label>Answer A</label>
+                <input
+                  name="surveyDescription"
+                  type="text"
+                  required
+                  className="form-control block  appearance-none rounded relative px-3  py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
+                  placeholder="A"
+                  ref={choiceA_3}
+                />{" "}
+              </div>
+              <div>
+                <label>Answer B</label>
+                <input
+                  name="surveyDescription"
+                  type="text"
+                  required
+                  className="form-control block appearance-none rounded relative px-3  py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
+                  placeholder="B"
+                  ref={choiceB_3}
+                />{" "}
+              </div>
+              <div>
+                <label>Answer C</label>
+
+                <input
+                  name="surveyDescription"
+                  type="text"
+                  required
+                  className="form-control block  appearance-none rounded relative px-3  py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
+                  placeholder="C"
+                  ref={choiceC_3}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="mb-8">
+            <label>Question 4</label>
+            <input
+              name="surveyDescription"
+              type="text"
+              required
+              className="form-control block w-3/4 appearance-none rounded relative px-3  py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
+              placeholder="Question 1"
+              ref={question4}
+            />
+            <div className="flex w-3/4 justify-around mt-4">
+              <div>
+                <label>Type</label>
+                <select
+                  name="surveyDescription"
+                  type="text"
+                  required
+                  ref={type4}
+                  className="form-control block w-3/4 appearance-none rounded relative px-3  py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
+                >
+                  <option value="Radio">Radio</option>
+                  <option value="Checkbox">Checkbox</option>
+                </select>
+              </div>
+              <div>
+                <label>Answer A</label>
+                <input
+                  name="surveyDescription"
+                  type="text"
+                  required
+                  className="form-control block  appearance-none rounded relative px-3  py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
+                  placeholder="A"
+                  ref={choiceA_4}
+                />{" "}
+              </div>
+              <div>
+                <label>Answer B</label>
+                <input
+                  name="surveyDescription"
+                  type="text"
+                  required
+                  className="form-control block appearance-none rounded relative px-3  py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
+                  placeholder="B"
+                  ref={choiceB_4}
+                />{" "}
+              </div>
+              <div>
+                <label>Answer C</label>
+
+                <input
+                  name="surveyDescription"
+                  type="text"
+                  required
+                  className="form-control block  appearance-none rounded relative px-3  py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
+                  placeholder="C"
+                  ref={choiceC_4}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="mb-8">
+            <label>Question 5</label>
+            <input
+              name="surveyDescription"
+              type="text"
+              required
+              className="form-control block w-3/4 appearance-none rounded relative px-3  py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
+              placeholder="Question 1"
+              ref={question5}
+            />
+            <div className="flex w-3/4 justify-around mt-4">
+              <div>
+                <label>Type</label>
+                <select
+                  name="surveyDescription"
+                  type="text"
+                  required
+                  ref={type5}
+                  className="form-control block w-3/4 appearance-none rounded relative px-3  py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
+                >
+                  <option value="Radio">Radio</option>
+                  <option value="Checkbox">Checkbox</option>
+                </select>
+              </div>
+              <div>
+                <label>Answer A</label>
+                <input
+                  name="surveyDescription"
+                  type="text"
+                  required
+                  className="form-control block  appearance-none rounded relative px-3  py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
+                  placeholder="A"
+                  ref={choiceA_5}
+                />{" "}
+              </div>
+              <div>
+                <label>Answer B</label>
+                <input
+                  name="surveyDescription"
+                  type="text"
+                  required
+                  className="form-control block appearance-none rounded relative px-3  py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
+                  placeholder="B"
+                  ref={choiceB_5}
+                />{" "}
+              </div>
+              <div>
+                <label>Answer C</label>
+
+                <input
+                  name="surveyDescription"
+                  type="text"
+                  required
+                  className="form-control block  appearance-none rounded relative px-3  py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
+                  placeholder="C"
+                  ref={choiceC_5}
                 />
               </div>
             </div>
           </div>
         </div>
-        <div className="flex justify-center ">
+        <div className="flex mb-10 justify-center w-3/4">
           <button
             type="submit"
             className=" relative py-2 px-16 border border-transparent text-sm font-medium rounded-md text-white bg-red-300 focus:outline-none"

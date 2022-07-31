@@ -54,9 +54,12 @@ export default function Surveys() {
               <span className="ml-2">+ {items.point} points</span>
             </div>
             <div>
-              <button className="text-white rounded bg-red-75 py-2 px-5">
+              <Link
+                to={"answersurvey/" + items.id}
+                className="text-white rounded bg-red-75 py-2 px-5"
+              >
                 Join Survey
-              </button>
+              </Link>
             </div>
           </div>
         </div>

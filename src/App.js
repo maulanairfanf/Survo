@@ -15,6 +15,7 @@ import Statistics from "pages/Statistics";
 import EditProfile from "pages/EditProfile";
 import Surveys from "pages/Surveys";
 import CreateSurvey from "pages/CreateSurvey";
+import AnswerSurvey from "pages/AnswerSurvey";
 
 import { getToken } from "helpers/common.js";
 import PrivateRoute from "helpers/PrivateRoute";
@@ -46,6 +47,7 @@ function App() {
                 path="/createsurvey"
                 component={CreateSurvey}
               />{" "}
+              <PrivateRoute path="/answersurvey/:id" component={AnswerSurvey} />{" "}
               <PrivateRoute path="/home" component={Home} />
               <PrivateRoute path="/pricing" component={Pricing} />
               <PrivateRoute path="/terms" component={Terms} />
