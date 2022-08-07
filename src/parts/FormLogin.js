@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Redirect, Route } from "react-router";
 
 export default function FormLogin() {
   const emailRef = useRef();
