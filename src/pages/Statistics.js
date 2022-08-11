@@ -1,6 +1,7 @@
 import React from "react";
 import profile from "assets/images/black_hole.jpg";
 import { getName } from "helpers/common.js";
+import { Link } from "react-router-dom";
 
 export default function Statistics() {
   const name = getName();
@@ -91,9 +92,12 @@ export default function Statistics() {
             </div>{" "}
           </div>{" "}
           <div className="">
-            <button className="px-5 py-2 bg-red-100 border border-white rounded-full">
+            <Link
+              to="/surveys"
+              className="px-5 py-2 bg-red-100 border border-white rounded-full"
+            >
               Join Survey{" "}
-            </button>{" "}
+            </Link>{" "}
           </div>{" "}
         </div>{" "}
       </div>{" "}

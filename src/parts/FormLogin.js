@@ -31,6 +31,8 @@ export default function FormLogin() {
           localStorage.setItem("token", response.data.data.token);
           localStorage.setItem("fullname", response.data.data.fullName);
           localStorage.setItem("email", response.data.data.email);
+          localStorage.setItem("id", response.data.data.id);
+
           history.push("/surveys");
           window.location.reload();
         }

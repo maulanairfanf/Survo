@@ -18,7 +18,6 @@ export default function Surveys() {
     axios(config)
       .then(function (response) {
         setSurveys(response.data.data);
-        console.log(surveys);
       })
       .catch(function (error) {
         console.log(error);
@@ -28,8 +27,9 @@ export default function Surveys() {
   const dataRender = surveys
     ? surveys.map((items) => (
         <div
+          key={items.id}
           className="border p-5 rounded-lg my-5"
-          style={{ width: 500, height: 200 }}
+          style={{ width: 480, height: 200 }}
         >
           <h1 className="font-bold text-xl mb-4">{items.title}</h1>
           <p className="mb-4">15 questions</p>

@@ -1,6 +1,33 @@
-import React from 'react';
-import Vector from 'assets/images/VectorPricing.png';
+import React, { useState } from "react";
+import Vector from "assets/images/VectorPricing.png";
+import { getToken, getId } from "helpers/common.js";
+
 export default function Pricing() {
+  const [message, setMessage] = useState("");
+  const token = getToken();
+  const id = getId();
+  console.log(id);
+  const getPremium = (e) => {
+    e.preventDefault();
+    var axios = require("axios");
+
+    var config = {
+      method: "post",
+      url: `https://survo-app.herokuapp.com/api/v1/transactionpremium/${id}`,
+      headers: {
+        Authorization: `Bearer ${token} `,
+      },
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        alert("Succes request untuk menjadi member premium");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
   return (
     <div>
       <img
@@ -27,18 +54,20 @@ export default function Pricing() {
             </p>
           </div>
           <div className="flex flex-col bg-red-100 text-white p-10 w-2/5">
-            <h1 className="text-3xl mb-10 mt-5 font-bold text-center ">
-              Rp <span className="text-5xl mt-10">35.000</span>
-            </h1>
-            <h5 className="text-3xl font-bold mb-5 text-center">Premium</h5>
-            <p className="text-2xl font-light text-center mb-10">
-              Unlimited access <br />
-              to all platform
-            </p>
-            <p className="text-sm font-light">
-              Unlimited use for survey and join survey <br /> Unlimited
-              respondents can participate <br /> Withdraw mininum 5.000 coins
-            </p>
+            <button onClick={getPremium}>
+              <h1 className="text-3xl mb-10 mt-5 font-bold text-center ">
+                Rp <span className="text-5xl mt-10">35.000</span>
+              </h1>
+              <h5 className="text-3xl font-bold mb-5 text-center">Premium</h5>
+              <p className="text-2xl font-light text-center mb-10">
+                Unlimited access <br />
+                to all platform
+              </p>
+              <p className="text-sm font-light">
+                Unlimited use for survey and join survey <br /> Unlimited
+                respondents can participate <br /> Withdraw mininum 5.000 coins
+              </p>
+            </button>
           </div>
         </div>
       </div>
