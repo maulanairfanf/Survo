@@ -3,8 +3,9 @@ import React, { useRef, useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getToken } from "helpers/common.js";
-
+import { useHistory } from "react-router-dom";
 export default function CreateSurvey() {
+  const history = useHistory();
   const [surveyTotal, setSurveyTotal] = useState();
   const question1 = useRef();
   const question2 = useRef();
@@ -127,6 +128,7 @@ export default function CreateSurvey() {
     axios(config)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
+        history.push("/surveys");
       })
       .catch(function (error) {
         console.log(error);

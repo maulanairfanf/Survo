@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 
 export default function AnswerSurvey(props) {
   const token = getToken();
-  const [data, setData] = useState("");
+  const [survey, setSurvey] = useState("");
   const [id, setId] = useState("");
   const [answer1, setAnswer1] = useState("");
   const [answer2, setAnswer2] = useState("");
@@ -23,7 +23,7 @@ export default function AnswerSurvey(props) {
   useEffect(() => {
     axios(config)
       .then(function (response) {
-        setData(response.data.data.question);
+        setSurvey(response.data.data.question);
         setId(response.data.data);
       })
       .catch(function (error) {
@@ -53,7 +53,6 @@ export default function AnswerSurvey(props) {
   };
 
   const submit = (e) => {
-    const arr = [];
     e.preventDefault();
     var axios = require("axios");
 
@@ -61,31 +60,31 @@ export default function AnswerSurvey(props) {
       {
         survey_id: id.id,
         user_id: id.user_id,
-        question_id: data[0].id,
+        question_id: survey[0].id,
         respond: answer1.value,
       },
       {
         survey_id: id.id,
         user_id: id.user_id,
-        question_id: data[1].id,
+        question_id: survey[1].id,
         respond: answer2.value,
       },
       {
         survey_id: id.id,
         user_id: id.user_id,
-        question_id: data[2].id,
+        question_id: survey[2].id,
         respond: answer3.value,
       },
       {
         survey_id: id.id,
         user_id: id.user_id,
-        question_id: data[3].id,
+        question_id: survey[3].id,
         respond: answer4.value,
       },
       {
         survey_id: id.id,
         user_id: id.user_id,
-        question_id: data[4].id,
+        question_id: survey[4].id,
         respond: answer5.value,
       },
     ]);
@@ -113,11 +112,18 @@ export default function AnswerSurvey(props) {
 
   return (
     <div>
-      {data ? (
+      {console.log(survey.length)}
+      {survey.length !== 0 ? (
         <form onSubmit={submit}>
           <div>
-            <p className="font-bold">1. {data[0].survey_question} ?</p>
-            {data[0].question_type == "Radio" ? (
+            <p className="font-bold">
+              1.{" "}
+              {survey[0].survey_question
+                ? survey[0].survey_question
+                : "Waiting..."}{" "}
+              ?
+            </p>
+            {survey[0].question_type == "Radio" ? (
               <div className="w-3/4 flex justify-around mt-4">
                 <div className="flex items-center ">
                   <input
@@ -128,7 +134,7 @@ export default function AnswerSurvey(props) {
                     name="answer_1"
                     onChange={handleChange1}
                   />
-                  <label htmlFor="answer1_1">{data[0].option_name[0]}</label>
+                  <label htmlFor="answer1_1">{survey[0].option_name[0]}</label>
                 </div>
                 <div className="flex items-center ">
                   <input
@@ -139,7 +145,7 @@ export default function AnswerSurvey(props) {
                     name="answer_1"
                     onChange={handleChange1}
                   />
-                  <label htmlFor="answer1_2">{data[0].option_name[1]}</label>
+                  <label htmlFor="answer1_2">{survey[0].option_name[1]}</label>
                 </div>
                 <div className="flex items-center ">
                   <input
@@ -150,50 +156,56 @@ export default function AnswerSurvey(props) {
                     name="answer_1"
                     onChange={handleChange1}
                   />
-                  <label htmlFor="answer1_3">{data[0].option_name[2]}</label>
+                  <label htmlFor="answer1_3">{survey[0].option_name[2]}</label>
                 </div>
               </div>
             ) : (
               <div className="w-3/4 flex justify-around mt-4">
                 {/* <div className="flex items-center ">
-                  <input
-                    className="mr-2"
-                    type="checkbox"
-                    id="answer1_1"
-                    value="checkbox A"
-                    name="answer_1"
-                    onChange={handleChange1}
-                  />
-                  <label htmlFor="answer1_1">{data[0].option_name[0]}</label>
-                </div>
-                <div className="flex items-center ">
-                  <input
-                    className="mr-2"
-                    type="checkbox"
-                    id="answer1_2"
-                    value="checkbox B"
-                    name="answer_1"
-                    onChange={handleChange1}
-                  />
-                  <label htmlFor="answer1_2">{data[0].option_name[1]}</label>
-                </div>
-                <div className="flex items-center ">
-                  <input
-                    className="mr-2"
-                    type="checkbox"
-                    id="answer1_3"
-                    value="checkbox C"
-                    name="answer_1"
-                    onChange={handleChange1}
-                  />
-                  <label htmlFor="answer1_3">{data[0].option_name[2]}</label>
-                </div> */}
+              <input
+                className="mr-2"
+                type="checkbox"
+                id="answer1_1"
+                value="checkbox A"
+                name="answer_1"
+                onChange={handleChange1}
+              />
+              <label htmlFor="answer1_1">{survey[0].option_name[0]}</label>
+            </div>
+            <div className="flex items-center ">
+              <input
+                className="mr-2"
+                type="checkbox"
+                id="answer1_2"
+                value="checkbox B"
+                name="answer_1"
+                onChange={handleChange1}
+              />
+              <label htmlFor="answer1_2">{survey[0].option_name[1]}</label>
+            </div>
+            <div className="flex items-center ">
+              <input
+                className="mr-2"
+                type="checkbox"
+                id="answer1_3"
+                value="checkbox C"
+                name="answer_1"
+                onChange={handleChange1}
+              />
+              <label htmlFor="answer1_3">{survey[0].option_name[2]}</label>
+            </div> */}
               </div>
             )}
           </div>
           <div>
-            <p className="font-bold">2. {data[1].survey_question} ?</p>
-            {data[1].question_type == "Radio" ? (
+            <p className="font-bold">
+              2.{" "}
+              {survey[1].survey_question
+                ? survey[1].survey_question
+                : "Waiting..."}{" "}
+              ?
+            </p>
+            {survey[1].question_type == "Radio" ? (
               <div className="w-3/4 flex justify-around mt-4">
                 <div className="flex items-center ">
                   <input
@@ -204,7 +216,7 @@ export default function AnswerSurvey(props) {
                     value="radio A"
                     onChange={handleChange2}
                   />
-                  <label htmlFor="answer2_1">{data[1].option_name[0]}</label>
+                  <label htmlFor="answer2_1">{survey[1].option_name[0]}</label>
                 </div>
                 <div className="flex items-center ">
                   <input
@@ -215,7 +227,7 @@ export default function AnswerSurvey(props) {
                     value="radio B"
                     onChange={handleChange2}
                   />
-                  <label htmlFor="answer2_2">{data[1].option_name[1]}</label>
+                  <label htmlFor="answer2_2">{survey[1].option_name[1]}</label>
                 </div>
                 <div className="flex items-center ">
                   <input
@@ -226,50 +238,56 @@ export default function AnswerSurvey(props) {
                     value="radio C"
                     onChange={handleChange2}
                   />
-                  <label htmlFor="answer2_3">{data[1].option_name[2]}</label>
+                  <label htmlFor="answer2_3">{survey[1].option_name[2]}</label>
                 </div>
               </div>
             ) : (
               <div className="w-3/4 flex justify-around mt-4">
                 {/* <div className="flex items-center ">
-                  <input
-                    className="mr-2"
-                    type="checkbox"
-                    id="answer2_1"
-                    name="answer2"
-                    value="checkbox A"
-                    onChange={handleChange2}
-                  />
-                  <label htmlFor="answer2_1">{data[1].option_name[0]}</label>
-                </div>
-                <div className="flex items-center ">
-                  <input
-                    className="mr-2"
-                    type="checkbox"
-                    id="answer2_2"
-                    name="answer2"
-                    value="checkbox B"
-                    onChange={handleChange2}
-                  />
-                  <label htmlFor="answer2_2">{data[1].option_name[1]}</label>
-                </div>
-                <div className="flex items-center ">
-                  <input
-                    className="mr-2"
-                    type="checkbox"
-                    id="answer2_3"
-                    name="answer2"
-                    value="checkbox C"
-                    onChange={handleChange2}
-                  />
-                  <label htmlFor="answer2_3">{data[1].option_name[2]}</label>
-                </div> */}
+              <input
+                className="mr-2"
+                type="checkbox"
+                id="answer2_1"
+                name="answer2"
+                value="checkbox A"
+                onChange={handleChange2}
+              />
+              <label htmlFor="answer2_1">{survey[1].option_name[0]}</label>
+            </div>
+            <div className="flex items-center ">
+              <input
+                className="mr-2"
+                type="checkbox"
+                id="answer2_2"
+                name="answer2"
+                value="checkbox B"
+                onChange={handleChange2}
+              />
+              <label htmlFor="answer2_2">{survey[1].option_name[1]}</label>
+            </div>
+            <div className="flex items-center ">
+              <input
+                className="mr-2"
+                type="checkbox"
+                id="answer2_3"
+                name="answer2"
+                value="checkbox C"
+                onChange={handleChange2}
+              />
+              <label htmlFor="answer2_3">{survey[1].option_name[2]}</label>
+            </div> */}
               </div>
             )}
-          </div>{" "}
+          </div>
           <div>
-            <p className="font-bold">3. {data[2].survey_question} ?</p>
-            {data[2].question_type == "Radio" ? (
+            <p className="font-bold">
+              3.{" "}
+              {survey[2].survey_question
+                ? survey[2].survey_question
+                : "Waiting..."}
+              ?
+            </p>
+            {survey[2].question_type == "Radio" ? (
               <div className="w-3/4 flex justify-around mt-4">
                 <div className="flex items-center ">
                   <input
@@ -280,7 +298,7 @@ export default function AnswerSurvey(props) {
                     value="radio A"
                     onChange={handleChange3}
                   />
-                  <label htmlFor="answer3_1">{data[2].option_name[0]}</label>
+                  <label htmlFor="answer3_1">{survey[2].option_name[0]}</label>
                 </div>
                 <div className="flex items-center ">
                   <input
@@ -291,7 +309,7 @@ export default function AnswerSurvey(props) {
                     value="radio B"
                     onChange={handleChange3}
                   />
-                  <label htmlFor="answer3_2">{data[2].option_name[1]}</label>
+                  <label htmlFor="answer3_2">{survey[2].option_name[1]}</label>
                 </div>
                 <div className="flex items-center ">
                   <input
@@ -302,50 +320,56 @@ export default function AnswerSurvey(props) {
                     value="radio C"
                     onChange={handleChange3}
                   />
-                  <label htmlFor="answer3_3">{data[2].option_name[2]}</label>
+                  <label htmlFor="answer3_3">{survey[2].option_name[2]}</label>
                 </div>
               </div>
             ) : (
               <div className="w-3/4 flex justify-around mt-4">
                 {/* <div className="flex items-center ">
-                  <input
-                    className="mr-2"
-                    type="checkbox"
-                    id="answer3_1"
-                    name="answer3"
-                    value="checkbox A"
-                    onChange={handleChange3}
-                  />
-                  <label htmlFor="answer3_1">{data[2].option_name[0]}</label>
-                </div>
-                <div className="flex items-center ">
-                  <input
-                    className="mr-2"
-                    type="checkbox"
-                    id="answer3_2"
-                    name="answer3"
-                    value="checkbox B"
-                    onChange={handleChange3}
-                  />
-                  <label htmlFor="answer3_2">{data[2].option_name[1]}</label>
-                </div>
-                <div className="flex items-center ">
-                  <input
-                    className="mr-2"
-                    type="checkbox"
-                    id="answer3_3"
-                    name="answer3"
-                    value="checkbox C"
-                    onChange={handleChange3}
-                  />
-                  <label htmlFor="answer3_3">{data[2].option_name[2]}</label>
-                </div> */}
+              <input
+                className="mr-2"
+                type="checkbox"
+                id="answer3_1"
+                name="answer3"
+                value="checkbox A"
+                onChange={handleChange3}
+              />
+              <label htmlFor="answer3_1">{survey[2].option_name[0]}</label>
+            </div>
+            <div className="flex items-center ">
+              <input
+                className="mr-2"
+                type="checkbox"
+                id="answer3_2"
+                name="answer3"
+                value="checkbox B"
+                onChange={handleChange3}
+              />
+              <label htmlFor="answer3_2">{survey[2].option_name[1]}</label>
+            </div>
+            <div className="flex items-center ">
+              <input
+                className="mr-2"
+                type="checkbox"
+                id="answer3_3"
+                name="answer3"
+                value="checkbox C"
+                onChange={handleChange3}
+              />
+              <label htmlFor="answer3_3">{survey[2].option_name[2]}</label>
+            </div> */}
               </div>
             )}
-          </div>{" "}
+          </div>
           <div>
-            <p className="font-bold">4. {data[3].survey_question} ?</p>
-            {data[3].question_type == "Radio" ? (
+            <p className="font-bold">
+              4.{" "}
+              {survey[3].survey_question
+                ? survey[3].survey_question
+                : "Waiting..."}{" "}
+              ?
+            </p>
+            {survey[3].question_type == "Radio" ? (
               <div className="w-3/4 flex justify-around mt-4">
                 <div className="flex items-center ">
                   <input
@@ -356,7 +380,7 @@ export default function AnswerSurvey(props) {
                     value="radio A"
                     onChange={handleChange4}
                   />
-                  <label htmlFor="answer4_1">{data[3].option_name[0]}</label>
+                  <label htmlFor="answer4_1">{survey[3].option_name[0]}</label>
                 </div>
                 <div className="flex items-center ">
                   <input
@@ -367,7 +391,7 @@ export default function AnswerSurvey(props) {
                     value="radio B"
                     onChange={handleChange4}
                   />
-                  <label htmlFor="answer4_2">{data[3].option_name[1]}</label>
+                  <label htmlFor="answer4_2">{survey[3].option_name[1]}</label>
                 </div>
                 <div className="flex items-center ">
                   <input
@@ -378,50 +402,56 @@ export default function AnswerSurvey(props) {
                     value="radio C"
                     onChange={handleChange4}
                   />
-                  <label htmlFor="answer4_3">{data[3].option_name[2]}</label>
+                  <label htmlFor="answer4_3">{survey[3].option_name[2]}</label>
                 </div>
               </div>
             ) : (
               <div className="w-3/4 flex justify-around mt-4">
                 {/* <div className="flex items-center ">
-                  <input
-                    className="mr-2"
-                    type="checkbox"
-                    id="answer4_1"
-                    name="answer4"
-                    value="Checkbox A"
-                    onChange={handleChange4}
-                  />
-                  <label htmlFor="answer4_1">{data[3].option_name[0]}</label>
-                </div>
-                <div className="flex items-center ">
-                  <input
-                    className="mr-2"
-                    type="checkbox"
-                    id="answer4_2"
-                    name="answer4"
-                    value="Checkbox B"
-                    onChange={handleChange4}
-                  />
-                  <label htmlFor="answer4_2">{data[3].option_name[1]}</label>
-                </div>
-                <div className="flex items-center ">
-                  <input
-                    className="mr-2"
-                    type="checkbox"
-                    id="answer4_3"
-                    name="answer4"
-                    value="Checkbox C"
-                    onChange={handleChange4}
-                  />
-                  <label htmlFor="answer4_3">{data[3].option_name[2]}</label>
-                </div> */}
+              <input
+                className="mr-2"
+                type="checkbox"
+                id="answer4_1"
+                name="answer4"
+                value="Checkbox A"
+                onChange={handleChange4}
+              />
+              <label htmlFor="answer4_1">{survey[3].option_name[0]}</label>
+            </div>
+            <div className="flex items-center ">
+              <input
+                className="mr-2"
+                type="checkbox"
+                id="answer4_2"
+                name="answer4"
+                value="Checkbox B"
+                onChange={handleChange4}
+              />
+              <label htmlFor="answer4_2">{survey[3].option_name[1]}</label>
+            </div>
+            <div className="flex items-center ">
+              <input
+                className="mr-2"
+                type="checkbox"
+                id="answer4_3"
+                name="answer4"
+                value="Checkbox C"
+                onChange={handleChange4}
+              />
+              <label htmlFor="answer4_3">{survey[3].option_name[2]}</label>
+            </div> */}
               </div>
             )}
-          </div>{" "}
+          </div>
           <div>
-            <p className="font-bold">5. {data[4].survey_question} ?</p>
-            {data[4].question_type == "Radio" ? (
+            <p className="font-bold">
+              5.
+              {survey[4].survey_question
+                ? survey[4].survey_question
+                : "Waiting..."}{" "}
+              ?
+            </p>
+            {survey[4].question_type == "Radio" ? (
               <div className="w-3/4 flex justify-around mt-4">
                 <div className="flex items-center ">
                   <input
@@ -432,7 +462,7 @@ export default function AnswerSurvey(props) {
                     value="radio A"
                     onChange={handleChange5}
                   />
-                  <label htmlFor="answer5_1">{data[4].option_name[0]}</label>
+                  <label htmlFor="answer5_1">{survey[4].option_name[0]}</label>
                 </div>
                 <div className="flex items-center ">
                   <input
@@ -443,7 +473,7 @@ export default function AnswerSurvey(props) {
                     value="radio B"
                     onChange={handleChange5}
                   />
-                  <label htmlFor="answer5_2">{data[4].option_name[1]}</label>
+                  <label htmlFor="answer5_2">{survey[4].option_name[1]}</label>
                 </div>
                 <div className="flex items-center ">
                   <input
@@ -454,44 +484,44 @@ export default function AnswerSurvey(props) {
                     value="radio C"
                     onChange={handleChange5}
                   />
-                  <label htmlFor="answer5_3">{data[4].option_name[2]}</label>
+                  <label htmlFor="answer5_3">{survey[4].option_name[2]}</label>
                 </div>
               </div>
             ) : (
               <div className="w-3/4 flex justify-around mt-4">
                 {/* <div className="flex items-center ">
-                  <input
-                    className="mr-2"
-                    type="checkbox"
-                    id="answer5_1"
-                    name="answer5"
-                    value="Checkbox A"
-                    onChange={handleChange5}
-                  />
-                  <label htmlFor="answer5_1">{data[4].option_name[0]}</label>
-                </div>
-                <div className="flex items-center ">
-                  <input
-                    className="mr-2"
-                    type="checkbox"
-                    id="answer5_2"
-                    name="answer5"
-                    value="Checkbox B"
-                    onChange={handleChange5}
-                  />
-                  <label htmlFor="answer5_2">{data[4].option_name[1]}</label>
-                </div>
-                <div className="flex items-center ">
-                  <input
-                    className="mr-2"
-                    type="checkbox"
-                    id="answer5_3"
-                    name="answer5"
-                    value="Checkbox C"
-                    onChange={handleChange5}
-                  />
-                  <label htmlFor="answer5_3">{data[4].option_name[2]}</label>
-                </div> */}
+              <input
+                className="mr-2"
+                type="checkbox"
+                id="answer5_1"
+                name="answer5"
+                value="Checkbox A"
+                onChange={handleChange5}
+              />
+              <label htmlFor="answer5_1">{survey[4].option_name[0]}</label>
+            </div>
+            <div className="flex items-center ">
+              <input
+                className="mr-2"
+                type="checkbox"
+                id="answer5_2"
+                name="answer5"
+                value="Checkbox B"
+                onChange={handleChange5}
+              />
+              <label htmlFor="answer5_2">{survey[4].option_name[1]}</label>
+            </div>
+            <div className="flex items-center ">
+              <input
+                className="mr-2"
+                type="checkbox"
+                id="answer5_3"
+                name="answer5"
+                value="Checkbox C"
+                onChange={handleChange5}
+              />
+              <label htmlFor="answer5_3">{survey[4].option_name[2]}</label>
+            </div> */}
               </div>
             )}
           </div>

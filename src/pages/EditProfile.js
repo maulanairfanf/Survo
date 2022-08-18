@@ -8,6 +8,8 @@ export default function EditProfile() {
   const [selectedFile, setSelectedFile] = useState();
   const [isFilePicked, setIsFilePicked] = useState(false);
   const [image, setImage] = useState("");
+  const [newData, setNewData] = useState("");
+  const [user, setUser] = useState("");
 
   const token = getToken();
   const jwtToken = jwt(token);
@@ -41,6 +43,23 @@ export default function EditProfile() {
       .catch(function (error) {
         console.log(error);
       });
+
+    var config2 = {
+      method: "get",
+      url: `https://survo-app.herokuapp.com/api/v1/profile/${iduser}`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    axios(config2)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        setUser(response.data.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }, []);
 
   const changeHandler = (event) => {
@@ -68,6 +87,7 @@ export default function EditProfile() {
   };
 
   const handleSubmit = (e) => {
+    console.log("Submit");
     const axios = require("axios");
 
     const data = JSON.stringify({
@@ -103,7 +123,10 @@ export default function EditProfile() {
         axios(configUpdate)
           .then(function (response) {
             if (response.status === 200) {
+              console.log(response.data.data);
               setError("");
+              alert("Berhasil Update Profile");
+              window.location.reload();
             }
           })
           .catch(function (error) {
@@ -147,7 +170,7 @@ export default function EditProfile() {
                 type="name"
                 required
                 className="appearance-none rounded relative w-full px-3 py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
-                placeholder="Full Name"
+                placeholder={user.fullName}
               />
             </div>{" "}
             <div className="mb-8">
@@ -158,7 +181,7 @@ export default function EditProfile() {
                 type="email"
                 required
                 className="appearance-none rounded relative w-full px-3 py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
-                placeholder="Email Address"
+                placeholder={user.email}
               />
             </div>{" "}
             <div className="mb-8">
@@ -169,7 +192,7 @@ export default function EditProfile() {
                 type="username"
                 required
                 className="appearance-none rounded relative w-full px-3 py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
-                placeholder="Username"
+                placeholder={user.username}
               />
             </div>{" "}
             <div className="mb-8">
@@ -228,7 +251,7 @@ export default function EditProfile() {
                 type="number"
                 required
                 className="appearance-none rounded relative w-full px-3 py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
-                placeholder="Phone Number"
+                placeholder={user.phone}
               />
             </div>{" "}
             <div className="mb-8">
@@ -238,6 +261,7 @@ export default function EditProfile() {
                 name="date"
                 type="date"
                 required
+                placeholder={user.birthday}
                 className="appearance-none rounded relative w-full px-3 py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
               />
             </div>{" "}
