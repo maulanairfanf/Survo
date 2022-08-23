@@ -5,6 +5,8 @@ export default function History() {
   const token = getToken();
   const [data, setData] = useState();
   const [amount, setAmount] = useState();
+  const [rekening, setRekening] = useState();
+  const [wallet, setWallet] = useState();
   useEffect(() => {
     var axios = require("axios");
 
@@ -26,14 +28,22 @@ export default function History() {
       });
   }, []);
 
-  const onChangeWithdraw = (e) => {
+  const onChangeAmount = (e) => {
     setAmount(e.target.value);
+  };
+  const onChangeWallet = (e) => {
+    setWallet(e.target.value);
+  };
+  const onChangeRekening = (e) => {
+    setRekening(e.target.value);
   };
   const handleWithdraw = () => {
     var axios = require("axios");
-    console.log(amount);
+
     var data = JSON.stringify({
-      amount: 100,
+      norek: parseInt(rekening),
+      wallet: wallet,
+      amount: parseInt(amount),
     });
 
     var config = {
@@ -52,7 +62,7 @@ export default function History() {
         alert("Succes withdraw point");
       })
       .catch(function (error) {
-        console.log(error.response.data.data.error);
+        console.log(error);
         alert(error.response.data.data.error);
       });
   };
@@ -73,14 +83,34 @@ export default function History() {
       </div>
       <div className="mt-5">
         <h1 className="font-bold text-red-75 text-2xl">Request Withdraw</h1>
-        <input
-          type="number"
-          onChange={onChangeWithdraw}
-          className="mr-6 appearance-none rounded relative mt-5 px-3 py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
-        />
+        <div className="flex flex-col mt-5">
+          <label>Amount</label>
+          <input
+            type="number"
+            onChange={onChangeAmount}
+            className="w-1/6 mr-6 appearance-none rounded relative px-3 py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
+          />
+        </div>
+        <div className="flex flex-col mt-5">
+          <label>Wallet</label>
+          <input
+            type="text"
+            onChange={onChangeWallet}
+            className="w-1/6 mr-6 appearance-none rounded relative px-3 py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
+          />{" "}
+        </div>
+        <div className="flex flex-col mt-5">
+          <label>Rekening</label>
+          <input
+            type="number"
+            onChange={onChangeRekening}
+            className="w-1/6 mr-6 appearance-none rounded relative px-3 py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
+          />{" "}
+        </div>
+
         <button
           onClick={handleWithdraw}
-          className=" relative py-2 px-10 border border-transparent text-sm font-medium rounded-md text-white bg-red-300 focus:outline-none"
+          className="mt-5 relative py-2 px-10 border border-transparent text-sm font-medium rounded-md text-white bg-red-300 focus:outline-none"
         >
           Withdraw
         </button>
