@@ -17,7 +17,7 @@ export default function DetailSurvey(props) {
 
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data.data.question));
+        console.log(response.data.data.question);
         setData(response.data.data.question);
       })
       .catch(function (error) {
@@ -39,7 +39,7 @@ export default function DetailSurvey(props) {
         <tbody>
           {data?.map((item, i) => {
             return (
-              <tr>
+              <tr key={i + 1}>
                 <td className="border border-slate-600 p-1">{i + 1}</td>
                 <td className="border border-slate-600 p-1">
                   {item.survey_question}

@@ -41,7 +41,7 @@ export default function MySurvey() {
         <tbody>
           {data?.map((item, i) => {
             return (
-              <tr>
+              <tr key={i + 1}>
                 <td className="border border-slate-600 p-1">{i + 1}</td>
                 <td className="border border-slate-600 p-1">{item.title}</td>
                 <td className="border border-slate-600 p-1">{item.summary}</td>

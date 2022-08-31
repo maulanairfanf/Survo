@@ -20,6 +20,7 @@ export default function DetailAnswer(props) {
         console.log(error);
       });
   }, []);
+  console.log(data);
   return (
     <div>
       <table className="table-auto border-collapse border border-slate-500 ">
@@ -34,7 +35,7 @@ export default function DetailAnswer(props) {
             return (
               <tr>
                 <td className="border border-slate-600 p-1">{i + 1}</td>
-                <td className="border border-slate-600 p-1">{item}</td>
+                <td className="border border-slate-600 p-1">{item.respond}</td>
               </tr>
             );
           })}
