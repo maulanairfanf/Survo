@@ -282,7 +282,7 @@ export default function CreateSurvey() {
               type="text"
               required
               className="form-control block w-3/4 appearance-none rounded relative px-3  py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
-              placeholder="Question 1"
+              placeholder="Question 2"
               ref={question2}
             />
             <div className="flex w-3/4 justify-around mt-4">
@@ -342,7 +342,7 @@ export default function CreateSurvey() {
               type="text"
               required
               className="form-control block w-3/4 appearance-none rounded relative px-3  py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
-              placeholder="Question 1"
+              placeholder="Question 3"
               ref={question3}
             />
             <div className="flex w-3/4 justify-around mt-4">
@@ -402,7 +402,7 @@ export default function CreateSurvey() {
               type="text"
               required
               className="form-control block w-3/4 appearance-none rounded relative px-3  py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
-              placeholder="Question 1"
+              placeholder="Question 4"
               ref={question4}
             />
             <div className="flex w-3/4 justify-around mt-4">
@@ -462,7 +462,7 @@ export default function CreateSurvey() {
               type="text"
               required
               className="form-control block w-3/4 appearance-none rounded relative px-3  py-2 border border-red-200 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none  focus:z-10 sm:text-sm"
-              placeholder="Question 1"
+              placeholder="Question 5"
               ref={question5}
             />
             <div className="flex w-3/4 justify-around mt-4">

@@ -221,7 +221,7 @@ export default function EditProfile() {
         </div>{" "}
         <div className="w-full m-5">
           <img
-            src={image}
+            src={image ? image : profile}
             alt="profile"
             style={{ width: 259, height: 259 }}
             className=" mx-auto rounded-full object-cover cursor-pointer"

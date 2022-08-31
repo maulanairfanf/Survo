@@ -11,7 +11,7 @@ export default function MySurvey() {
 
     var config = {
       method: "get",
-      url: `https://survo-app.herokuapp.com/api/v1/surveylist?${id}`,
+      url: `https://survo-app.herokuapp.com/api/v1/surveylist?user_id=${id}`,
       headers: {},
     };
 
