@@ -71,15 +71,30 @@ export default function History() {
     <div>
       <div>
         <h1 className="font-bold text-red-75 text-2xl">History Transaksi</h1>
-        {data ? (
-          <div>
-            <h1>Status : {data.Status ? data.status : "Null"}</h1>
-            <h1>Amount : {data.Amount ? data.Amount : "Null"}</h1>
-            <h1>Created At : {data.User ? data.User.CreatedAt : "Null"}</h1>
-          </div>
-        ) : (
-          <h1>Memuat Data...</h1>
-        )}
+        <table className="table-auto border-collapse border border-slate-500 ">
+          <thead>
+            <tr>
+              <th className="border border-slate-600 p-1">No</th>
+              <th className="border border-slate-600 p-1">Status</th>
+              <th className="border border-slate-600 p-1">Amount</th>
+              <th className="border border-slate-600 p-1">Created At</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data?.map((item, i) => {
+              return (
+                <tr key={i + 1}>
+                  <td className="border border-slate-600 p-1">{i + 1}</td>
+                  <td className="border border-slate-600 p-1">{item.status}</td>
+                  <td className="border border-slate-600 p-1">{item.amount}</td>
+                  <td className="border border-slate-600 p-1">
+                    {item.created_at}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
       <div className="mt-5">
         <h1 className="font-bold text-red-75 text-2xl">Request Withdraw</h1>
